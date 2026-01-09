@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar | Redefining Luxury</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-color: #F9F9F9;
+            --text-dark: #111111;
+            --text-gray: #555555;
+            --white: #FFFFFF;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --container-width: 1200px;
+            --spacing-section: 100px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; object-fit: cover; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--text-dark);
+            text-transform: uppercase;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 12px 30px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border: 1px solid var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--text-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: var(--text-dark);
+            color: var(--white);
+        }
+
+        /* --- NEW: High Contrast CTA Button Class --- */
+        .btn-cta-dark {
+            background: #000 !important;
+            color: #fff !important;
+            border: 1px solid #000 !important;
+            padding: 12px 30px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-cta-dark:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            z-index: 100;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            padding: 10px 10px 10px 0;
+            font-size: 1rem;
+            display: flex; /* Display flex by default (mobile) */
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .menu-icon:hover {
+            opacity: 0.7;
+        }
+
+        /* --- NEW: Desktop Navigation Styles --- */
+        .desktop-nav {
+            display: none; /* Hidden on mobile */
+            gap: 30px;
+        }
+
+        .desktop-nav a {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+        }
+        .desktop-nav a:hover {
+            color: var(--text-gray);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .nav-icons span {
+            margin-left: 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            white-space: nowrap;
+        }
+        
+        .nav-icons span:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- MOBILE NAV OVERLAY (UPDATED) --- */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: var(--white);
+            z-index: 9999;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Items at top */
+            align-items: center;
+            padding-top: 100px; /* Spacing from top */
+        }
+
+        .mobile-nav-overlay.active {
+            transform: translateX(0);
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-nav-links {
+            width: 100%;
+            padding: 0 40px;
+        }
+
+        .mobile-nav-links a {
+            font-family: var(--font-sans); /* Force Sans-Serif (Montserrat) */
+            font-size: 1.5rem; /* Slightly smaller than before for elegance */
+            display: block;
+            padding: 20px 0;
+            text-align: left; /* Align Left */
+            color: var(--text-dark);
+            border-bottom: 1px solid #000; /* Black bottom border */
+        }
+
+        .mobile-nav-links a:hover {
+            font-style: normal;
+            background-color: #f5f5f5;
+            padding-left: 10px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-img {
+            width: 350px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero-badge {
+            position: absolute;
+            left: 10%;
+            top: 50%;
+            width: 100px;
+            height: 100px;
+            border: 1px solid var(--text-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.7rem;
+            background: var(--bg-color);
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- FEATURES --- */
+        .features {
+            padding: var(--spacing-section) 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .features-text { padding-right: 40px; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: #EAEAEA;
+            padding: 30px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover { transform: translateY(-5px); }
+
+        .stat-card.dark { background: #111; color: #fff; }
+        .stat-card.dark h3 { color: #fff; }
+
+        .stat-card h3 { font-size: 2rem; margin-bottom: 5px; }
+        .stat-card p { font-size: 0.8rem; text-transform: uppercase; opacity: 0.7; }
+
+        /* --- FEATURED COLLECTION --- */
+        .collection { padding: var(--spacing-section) 0; }
+
+        .collection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+
+        .product-card {
+            background: var(--white);
+            padding: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        .product-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-serif);
+        }
+        
+        .product-info h4 { font-size: 1rem; font-weight: 600; }
+        .product-info span { color: var(--text-gray); font-size: 0.9rem; }
+
+        .center-btn { text-align: center; }
+
+        /* --- SHOP WITH CONFIDENCE --- */
+        .confidence { padding: var(--spacing-section) 0; text-align: center; }
+
+        .confidence-layout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-top: 50px;
+            gap: 40px;
+        }
+
+        .confidence-img {
+            width: 300px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .confidence-item { width: 200px; text-align: left; }
+        .confidence-item.right { text-align: right; }
+
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .right .icon-circle { margin-left: auto; }
+
+        /* --- LIMITED DROP --- */
+        .limited { padding: var(--spacing-section) 0; background: #fff; }
+
+        .limited-container { display: flex; align-items: center; gap: 60px; }
+        .limited-text { flex: 1; }
+        .limited-img { flex: 1; }
+
+        .limited-text h2 { font-size: 3rem; margin-bottom: 20px; }
+        
+        .badge {
+            background: #eee;
+            padding: 5px 10px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials { padding: var(--spacing-section) 0; text-align: center; }
+
+        .carousel-container {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; padding: 20px; }
+
+        .stars { color: #D4AF37; margin-bottom: 20px; font-size: 1.2rem; }
+        .quote {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        .user-profile img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            object-fit: cover;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .nav-btn {
+            pointer-events: auto;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #ccc;
+            padding: 0 20px;
+            transition: color 0.3s;
+        }
+        .nav-btn:hover { color: #000; }
+
+        /* --- BANNER CTA --- */
+        .banner-cta {
+            position: relative;
+            height: 400px;
+            width: 100%;
+        }
+
+        .banner-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(0.7);
+            z-index: -1;
+            top: 0; left: 0;
+        }
+
+        .banner-content {
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* FIXED: Removed the '1' from font-size */
+        .banner-content h2 { color: #fff; font-size: 2rem; margin-bottom: 20px; }
+       .cta_collection:hover, .cta_collection:active {
+           transform: scale(1.1);
+           background-color: white !important;
+           color: black !important;
+       }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #000;
+            color: #fff;
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+
+        .footer-top {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 60px;
+        }
+
+        .footer-top h2 { color: #fff; font-size: 1.8rem; margin-bottom: 20px; }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 40px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form input {
+            padding: 15px;
+            width: 70%;
+            background: transparent;
+            border: 1px solid #555;
+            color: #fff;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            width: 30%;
+            background: #fff;
+            border: 1px solid #fff;
+            color: #000;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-form button:hover { background: #ddd; }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 100px;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+        
+        .social-links span { cursor: pointer; }
+        .social-links span:hover { text-decoration: underline; }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 40px;
+            display: flex;
+            gap: 30px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .footer-links a:hover { color: #fff; }
+
+        .giant-logo {
+            border: 4px solid #fff;
+            padding: 40px 100px;
+            border-radius: 50% / 100%;
+            margin-bottom: 40px;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .giant-logo:hover { transform: scale(1.05); }
+
+        .giant-logo h1 { color: #fff; font-size: 4rem; margin: 0; }
+
+        .copyright {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+        
+        .copyright i { cursor: pointer; transition: 0.3s; }
+        .copyright i:hover { color: #fff; }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 1024px) {
+            .product-grid {display: grid; grid-template-columns: repeat(2, 1fr); }
+            .giant-logo h1 { font-size: 3rem; }
+            .giant-logo { padding: 30px 60px; }
+        }
+
+        /* MEDIA QUERY FOR NAV BAR: Laptop/Desktop sees text links, Mobile sees Hamburger */
+        @media (min-width: 769px) {
+            .menu-icon { display: none !important; } /* Hide hamburger on desktop */
+            .desktop-nav { display: flex !important; } /* Show text links on desktop */
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .hero h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .features-text { padding-right: 0; margin-bottom: 30px; }
+            .confidence-layout { flex-direction: column; }
+            .confidence-item, .confidence-item.right { text-align: center; width: 100%; margin-bottom: 20px; }
+            .right .icon-circle { margin: 0 auto 10px; }
+            .icon-circle { margin: 0 auto 10px; }
+            .limited-container { flex-direction: column-reverse; }
+            .giant-logo h1 { font-size: 2rem; }
+            .giant-logo { padding: 20px 40px; width: 90%; }
+            .social-links { gap: 30px; font-size: 1rem; }
+            .copyright { flex-direction: column; gap: 10px; text-align: center; }
+            
+            header { padding: 15px 0; }
+        }
+
+        /* --- MOBILE SCREEN OPTIMIZATION --- */
+        @media (max-width: 500px) {
+            header { padding: 15px 0; }
+            .logo { font-size: 1.2rem; letter-spacing: 1px; }
+            .menu-icon { font-size: 0.8rem; }
+            .nav-icons span { margin-left: 10px; font-size: 1rem; }
+            .product-grid { grid-template-columns: 1fr; }
+            .hero-img { width: 100%; height: 400px; }
+            .hero-badge { display: none; }
+            .stat-card { min-height: 120px; }
+            .footer-links { flex-direction: column; gap: 15px; }
+        }
+
+        @media (max-width: 360px) {
+            .logo { font-size: 1rem; }
+            .menu-icon { font-size: 0.75rem; }
+            .nav-icons span { margin-left: 8px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <div class="close-menu" onclick="toggleMenu()">&times;</div>
+        <div class="mobile-nav-links">
+            <a href="#" onclick="toggleMenu()">Home</a>
+            <a href="#collection" onclick="toggleMenu()">Collection</a>
+            <a href="#features" onclick="toggleMenu()">Why Stellar</a>
+            <a href="#limited" onclick="toggleMenu()">Limited Drop</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i> Menu</div>
+            
+            <div class="logo">STELLAR.</div>
+
+            <nav class="desktop-nav">
+                <a href="#">Home</a>
+                <a href="#collection">Collection</a>
+                <a href="#features">Why Stellar</a>
+                <a href="#limited">Limited Drop</a>
+            </nav>
+
+            <div class="nav-icons">
+                <span onclick="alert('Your cart is currently empty.')"><i class="fas fa-shopping-bag"></i> (0)</span>
+            </div>
+        </header>
+
+        <section class="hero">
+            <h1>REDEFINING LUXURY.<br>ONE WATCH AT A TIME.</h1>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    High Quality<br>Approved
+                </div>
+                <img src="images/hero.jpg" alt="Man in Suit with Watch" class="hero-img">
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="features-grid">
+                <div class="features-text">
+                    <h2 class="section-title">WHY CHOOSE<br>STELLAR</h2>
+                    <p class="subtitle">We maximize value by bridging the gap between luxury and affordability. Stellar combines premium materials with timeless design.</p>
+                    <a href="#collection" class="btn">Explore Now</a>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card dark">
+                        <div>
+                            <i class="fas fa-certificate" style="margin-bottom:10px;"></i>
+                            <h3>170+</h3>
+                        </div>
+                        <p>Watches Available</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-star" style="margin-bottom:10px;"></i>
+                        <h3>4.8</h3>
+                        <p>Customer Rating</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>1200+</h3>
+                        <p>Purchases in 2024</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>84 Years</h3>
+                        <p>Family Business</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="collection" id="collection">
+            <div class="collection-header">
+                <h2 class="section-title">FEATURED COLLECTION</h2>
+                
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card" onclick="location.href='#product-details'">
+                    <img src="images/classic.jpg" alt="Classic Watch, Simple but grand" class="product-img">
+                    <div class="product-info">
+                        <h4>Stellar Classic</h4>
+                        <span>$2,500</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='#product-details'">
+                    <img src="images/royal-blue.jpg" alt="Luxury watch with Royal Bule Display" class="product-img">
+                    <div class="product-info">
+                        <h4>Royal Blue</h4>
+                        <span>$3,200</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='#product-details'">
+                    <img src="images/vanguard.jpg" alt="Grand Gold Luxury watch" class="product-img">
+                    <div class="product-info">
+                        <h4>Vanguard Gold</h4>
+                        <span>$4,100</span>
+                    </div>
+                </div>
+                
+                <div class="product-card" onclick="location.href='#product-details'">
+                    <img src="images/legacy-oak.jpg" alt="leather band watch, with premium feel" class="product-img">
+                    <div class="product-info">
+                        <h4>Legacy Oak</h4>
+                        <span>$1,900</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='#product-details'">
+                    <img src="images/pilot.jpg" alt="Luxurious silver Watch" class="product-img">
+                    <div class="product-info">
+                        <h4>Stellar Pilot</h4>
+N                        <span>$2,850</span>
+                    </div>
+                </div>
+                <div class="product-card" onclick="location.href='#product-details'">
+                    <img src="images/midnight-sea.jpg" alt="Dark Colored Watch" class="product-img">
+                    <div class="product-info">
+                        <h4>Midnight Sea</h4>
+                        <span>$3,400</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-btn">
+                <a href="#collection" class="btn">View All</a>
+            </div>
+        </section>
+
+        <section class="confidence">
+            <h2 class="section-title">SHOP WITH CONFIDENCE</h2>
+            <p class="subtitle">Every Stellar watch is inspected for authenticity and quality.</p>
+            
+            <div class="confidence-layout">
+                <div class="confidence-left">
+                    <div class="confidence-item right">
+                        <div class="icon-circle"><i class="fas fa-truck"></i></div>
+                        <h4>Fast & Secure Delivery</h4>
+                        <p style="font-size: 0.8rem; color: #777;">Insured worldwide shipping via DHL Express.</p>
+                    </div>
+                </div>
+
+                <img src="images/display.jpg" alt="Luxurious Premium Watch as display" class="confidence-img">
+
+                <div class="confidence-right">
+                    <div class="confidence-item">
+                        <div class="icon-circle"><i class="fas fa-shield-alt"></i></div>
+                        <h4>100% Authenticity Guarantee</h4>
+                        <p style="font-size: 0.8rem; color: #777;">Every watch is verified by our master watchmakers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+        <section class="limited" id="limited">
+            <div class="container">
+            <div class="limited-container">
+                <div class="limited-text">
+                    <span class="badge">New In</span>
+                    <h2>Limited Drop<br>—Only 100 Pieces</h2>
+                    <p class="subtitle">The Essence Collection features rare organic materials combined with Swiss precision movements. Don't miss out.</p>
+                    <a href="#collection" class="btn">Shop Now</a>
+                </div>
+                <div class="limited-img">
+                    <img src="images/deal.jpg" alt="Luxurious Watch" style="padding: 0; width:100%; height: 400px; object-fit: cover; object-position: center">
+                </div>
+            </div>
+            </div>
+        </section>
+        <div class="container">
+
+        <section class="testimonials">
+            <div class="carousel-container">
+                <div class="carousel-nav">
+                    <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                
+                <div class="carousel-track" id="track">
+                    <div class="slide">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="quote">"ABSOLUTELY STUNNING WATCH. THE QUALITY EXCEEDED MY EXPECTATIONS FOR THE PRICE POINT."</p>
+                        <div class="user-profile">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" alt="User">
+                            <h5>Mike Lewis</h5>
+                            <span style="font-size: 0.7rem; color: #999;">Customer</span>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="quote">"STELLAR TRULY LIVES UP TO ITS NAME. THE CRAFTSMANSHIP IS UNMATCHED IN THIS TIER."</p>
+                        <div class="user-profile">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="User">
+                            <h5>Sarah James</h5>
+                            <span style="font-size: 0.7rem; color: #999;">Collector</span>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="quote">"FAST SHIPPING AND PACKAGING WAS INCREDIBLE. FEELS LIKE A $10K WATCH."</p>
+                        <div class="user-profile">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop" alt="User">
+                            <h5>David Chen</h5>
+                            <span style="font-size: 0.7rem; color: #999;">Customer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="banner-cta">
+        <img src="images/banner.jpg" alt="Background" class="banner-img">
+        <div class="banner-content">
+            <h2>FIND THE RIGHT WATCH FOR YOUR<br>LIFESTYLE</h2>
+            <a href="#" class="btn-outline cta_collection" style="border-color: #fff; background-color: transparent; color: white; padding: 10px 15px;">Our Collection</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <h2>STAY IN TIME. GET 10% OFF FIRST ORDER.</h2>
+                <p style="color: #888; margin-bottom: 20px; font-size: 0.8rem;">Subscribe to our newsletter for new drops and exclusive offers.</p>
+                <form class="newsletter-form">
+                    <input type="email" required placeholder="Your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+                <div class="social-links">
+                    <span>Telegram</span>
+                    <span><i class="fas fa-plus" style="font-size: 0.8rem;"></i></span>
+                    <span>Whatsapp</span>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-links">
+                    <a href="#">Explore</a>
+                    <a href="#">About</a>
+                    <a href="#">Privacy & Policy</a>
+                    <a href="#">Contact</a>
+                </div>
+                
+                <div class="giant-logo" onclick="window.scrollTo(0,0)">
+                    <h1>STELLAR.</h1>
+                </div>
+
+                <div class="copyright">
+                    <span>Stellar © 2024</span>
+                    <div>
+                        <i class="fab fa-instagram" style="margin-right: 15px;"></i>
+                        <i class="fab fa-facebook-f" style="margin-right: 15px;"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- CAROUSEL LOGIC ---
+        const track = document.getElementById('track');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slides = document.querySelectorAll('.slide');
+        
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            // Recalculate width dynamically
+            const width = slides[0].clientWidth;
+            track.style.transform = `translateX(-${currentIndex * width}px)`;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        });
+
+        // ADDED: Fix for resizing issue
+        window.addEventListener('resize', updateCarousel);
+
+        // --- MOBILE MENU LOGIC ---
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-nav');
+            menu.classList.toggle('active');
+        }
+
+        // --- NEWSLETTER SUBMISSION ---
+        const form = document.querySelector('.newsletter-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = form.querySelector('input').value;
+            alert(`Thank you for subscribing! A confirmation has been sent to ${email}.`);
+            form.reset();
+        });
+    </script>
+</body>
+</html>
